@@ -3,6 +3,11 @@
 
 set -u
 
+if [[ -n "${ACME_TOS_HASH:-}" ]]; then
+    echo -n "The ACME_TOS_HASH environment variable is no longer used by simp_le "
+    echo "and has been deprecated. simp_le now implicitly agree to the ACME CA ToS."
+fi
+
 export CONTAINER_ID=$(cat /proc/self/cgroup | sed -nE 's/^.+docker[\/-]([a-f0-9]{64}).*/\1/p' | head -n 1)
 
 if [[ -z "$CONTAINER_ID" ]]; then
