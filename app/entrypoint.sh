@@ -16,7 +16,7 @@ ecs|ECS)
     fi
     ;;
 *)
-    export CONTAINER_ID=$(sed -nE 's/^.+docker[\/-]([a-f0-9]{64}).*/\1/p' /proc/self/cgroup | head -n 1)
+    export CONTAINER_ID=$(cat /proc/self/cgroup | sed -nE 's/^.+(docker[\/-]|ecs\/[a-f0-9\-]+\/)([a-f0-9]{64}).*/\2/p' | head -n 1)
     ;;
 esac
 
